@@ -7,66 +7,72 @@ namespace HairSalonApp
 {
     public class Client
     {
-        // private string _name;
-        // private int _id;
-        //
-        // public Stylist(string newName, int newId = 0)
+        private int _stylistId;
+        private string _name;
+        private string _hairColor;
+        private string _date;
+        private int _id;
+
+        public Client(string newName, int newStylistId, string newHairColor, string newDate, int newId = 0)
+        {
+            _name = newName;
+            _id = newId;
+            _stylistId = newStylistId;
+            _hairColor = newHairColor;
+            _date = newDate;
+        }
+        // public override bool Equals(System.Object otherClient)
         // {
-        //     _name = newName;
-        //     _id = newId;
-        // }
-        // public override bool Equals(System.Object otherStylist)
-        // {
-        //     // This override will allow Stylist.Equals to test each contained value as an identity
-        //     if(!(otherStylist is Stylist))
+        //     // This override will allow Client.Equals to test each contained value as an identity
+        //     if(!(otherClient is Client))
         //     {
         //         return false;
         //     }
         //     else
         //     {
-        //         Stylist newStylist = (Stylist) otherStylist;
-        //         bool nameIdentity = this.GetName() == newStylist.GetName();
-        //         bool idIdentity = this.GetId() == newStylist.GetId();
+        //         Client newClient = (Client) otherClient;
+        //         bool nameIdentity = this.GetName() == newClient.GetName();
+        //         bool idIdentity = this.GetId() == newClient.GetId();
         //         return (nameIdentity && idIdentity);
         //     }
         // }
         //
         // public override int GetHashCode()
         // {
-        //     // This override will allow Stylist.GetHashCode to function with the override .Equals
+        //     // This override will allow Client.GetHashCode to function with the override .Equals
         //     return this.GetName().GetHashCode();
         // }
         //
-        // public static List<Stylist> GetAll()
-        // {
-        //     // Returns a list of all the stylists in the stylist table
-        //     List<Stylist> allStylists = new List<Stylist> {};
-        //
-        //     SqlConnection conn = DB.Connection();
-        //     conn.Open();
-        //
-        //     SqlCommand cmd = new SqlCommand("SELECT * FROM stylists", conn);
-        //     SqlDataReader rdr = cmd.ExecuteReader();
-        //
-        //     while(rdr.Read())
-        //     {
-        //         allStylists.Add(new Stylist(rdr.GetString(1), rdr.GetInt32(0)));
-        //     }
-        //
-        //     DB.CloseSqlConnection(rdr, conn);
-        //
-        //     return allStylists;
-        // }
+        public static List<Client> GetAll()
+        {
+            // Returns a list of all the clients in the client table
+            List<Client> allClients = new List<Client> {};
+
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("SELECT * FROM clients", conn);
+            SqlDataReader rdr = cmd.ExecuteReader();
+
+            while(rdr.Read())
+            {
+                allClients.Add(new Client(rdr.GetString(2), rdr.GetInt32(1), rdr.GetString(3), rdr.GetString(4), rdr.GetInt32(0)));
+            }
+
+            DB.CloseSqlConnection(rdr, conn);
+
+            return allClients;
+        }
         //
         // public void Save()
         // {
-        //     // Adds a local Stylist Object to the database, won't save if it's a duplicate stylist
-        //     if (this.IsNewStylist() == -1)
+        //     // Adds a local Client Object to the database, won't save if it's a duplicate client
+        //     if (this.IsNewClient() == -1)
         //     {
         //         SqlConnection conn = DB.Connection();
         //         conn.Open();
         //
-        //         SqlCommand cmd = new SqlCommand("INSERT INTO stylists (name) OUTPUT INSERTED.id VALUES (@NewName)", conn);
+        //         SqlCommand cmd = new SqlCommand("INSERT INTO clients (name) OUTPUT INSERTED.id VALUES (@NewName)", conn);
         //         cmd.Parameters.Add(new SqlParameter("@NewName", this.GetName()));
         //
         //         SqlDataReader rdr = cmd.ExecuteReader();
@@ -79,13 +85,13 @@ namespace HairSalonApp
         //     }
         // }
         //
-        // public static Stylist Find(int targetId)
+        // public static Client Find(int targetId)
         // {
-        //     // Looks in the database for a stylist with the given id, returns it as a Stylist Object if found, else returns a Stylist object with null values
+        //     // Looks in the database for a client with the given id, returns it as a Client Object if found, else returns a Client object with null values
         //     SqlConnection conn = DB.Connection();
         //     conn.Open();
         //
-        //     SqlCommand cmd = new SqlCommand("SELECT * FROM stylists WHERE id=@TargetId;", conn);
+        //     SqlCommand cmd = new SqlCommand("SELECT * FROM clients WHERE id=@TargetId;", conn);
         //     cmd.Parameters.Add(new SqlParameter("@TargetId", targetId));
         //     SqlDataReader rdr = cmd.ExecuteReader();
         //
@@ -98,19 +104,19 @@ namespace HairSalonApp
         //         newId = rdr.GetInt32(0);
         //     }
         //
-        //     Stylist foundStylist = new Stylist(newName, newId);
+        //     Client foundClient = new Client(newName, newId);
         //
         //     DB.CloseSqlConnection(rdr, conn);
-        //     return foundStylist;
+        //     return foundClient;
         // }
         //
         // public void Update(string newName)
         // {
-        //     // Updates a Stylists information in the database and alters the local stylist
+        //     // Updates a Clients information in the database and alters the local client
         //     SqlConnection conn = DB.Connection();
         //     conn.Open();
         //
-        //     SqlCommand cmd = new SqlCommand("UPDATE stylists SET name=@NewName OUTPUT INSERTED.name WHERE id=@TargetId", conn);
+        //     SqlCommand cmd = new SqlCommand("UPDATE clients SET name=@NewName OUTPUT INSERTED.name WHERE id=@TargetId", conn);
         //     cmd.Parameters.Add(new SqlParameter("@NewName", newName));
         //     cmd.Parameters.Add(new SqlParameter("@TargetId", this.GetId()));
         //     SqlDataReader rdr = cmd.ExecuteReader();
@@ -125,11 +131,11 @@ namespace HairSalonApp
         //
         // public void Delete()
         // {
-        //     // Delete a stylist from the databas. Currently does nothing to their clients
+        //     // Delete a client from the databas. Currently does nothing to their clients
         //     SqlConnection conn = DB.Connection();
         //     conn.Open();
         //
-        //     SqlCommand cmd = new SqlCommand("DELETE FROM stylists WHERE id=@TargetId;", conn);
+        //     SqlCommand cmd = new SqlCommand("DELETE FROM clients WHERE id=@TargetId;", conn);
         //     cmd.Parameters.Add(new SqlParameter("@TargetId", this.GetId()));
         //     cmd.ExecuteNonQuery();
         //
@@ -139,36 +145,36 @@ namespace HairSalonApp
         //     }
         // }
         //
-        // public static List<Stylist> Search(string targetName)
+        // public static List<Client> Search(string targetName)
         // {
-        //     // Returns a list of Stylists from the database if the name is the same
-        //     List<Stylist> foundStylists = new List<Stylist> {};
+        //     // Returns a list of Clients from the database if the name is the same
+        //     List<Client> foundClients = new List<Client> {};
         //
         //     SqlConnection conn = DB.Connection();
         //     conn.Open();
         //
-        //     SqlCommand cmd = new SqlCommand("SELECT * FROM stylists WHERE name LIKE @TargetName;", conn);
+        //     SqlCommand cmd = new SqlCommand("SELECT * FROM clients WHERE name LIKE @TargetName;", conn);
         //     cmd.Parameters.Add(new SqlParameter("@TargetName", "%" + targetName + "%"));
         //
         //     SqlDataReader rdr = cmd.ExecuteReader();
         //
         //     while(rdr.Read())
         //     {
-        //         foundStylists.Add(new Stylist(rdr.GetString(1), rdr.GetInt32(0)));
+        //         foundClients.Add(new Client(rdr.GetString(1), rdr.GetInt32(0)));
         //     }
         //     DB.CloseSqlConnection(rdr, conn);
         //
-        //     return foundStylists;
+        //     return foundClients;
         //
         // }
         //
-        // public int IsNewStylist()
+        // public int IsNewClient()
         // {
-        //     // Checks if the stylist already exists in the database. Returns the stylist Id if already exists, else returns -1
+        //     // Checks if the client already exists in the database. Returns the client Id if already exists, else returns -1
         //     SqlConnection conn = DB.Connection();
         //     conn.Open();
         //
-        //     SqlCommand cmd = new SqlCommand("SELECT * FROM stylists WHERE name=@TargetName;", conn);
+        //     SqlCommand cmd = new SqlCommand("SELECT * FROM clients WHERE name=@TargetName;", conn);
         //     cmd.Parameters.Add(new SqlParameter("@TargetName", this.GetName()));
         //     SqlDataReader rdr = cmd.ExecuteReader();
         //
@@ -203,10 +209,10 @@ namespace HairSalonApp
         //     return _id;
         // }
         //
-        // public static void DeleteAll()
-        // {
-        //     // Deletes all stylists in the stylist table
-        //     DB.TableDeleteAll("stylists");
-        // }
+        public static void DeleteAll()
+        {
+            // Deletes all clients in the client table
+            DB.TableDeleteAll("clients");
+        }
     }
 }

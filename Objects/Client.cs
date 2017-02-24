@@ -212,6 +212,11 @@ namespace HairSalonApp
             return resultId;
         }
 
+        public string GetStylistName()
+        {
+            return Stylist.Find(_stylistId).GetName();
+        }
+
 
 
 

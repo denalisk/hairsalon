@@ -192,6 +192,19 @@ namespace HairSalonApp
         }
 
         [Fact]
+        public void Client_GetStylistName_ReturnNameOfStylist()
+        {
+            // Arrange
+            Stylist firstStylist = new Stylist("Lauren");
+            firstStylist.Save();
+            Client firstClient = new Client("Bob", firstStylist.GetId(), "Brown", System.DateTime.Now);
+            firstClient.Save();
+
+            // Act, Assert
+            Assert.Equal(firstStylist.GetName(), firstClient.GetStylistName());
+
+        }
+        [Fact]
         public void TEST1()
         {
             // Arrange

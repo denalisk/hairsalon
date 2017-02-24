@@ -134,6 +134,7 @@ namespace HairSalonApp
                 newStylist.Save();
                 newStylistId = newStylist.GetId();
             }
+                this.SetStylistId(newStylistId);
 
             // SQL section
             SqlConnection conn = DB.Connection();

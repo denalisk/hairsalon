@@ -12,7 +12,7 @@ else
     @foreach(var entry in Model)
     {
         <div class="stylist-holder">
-        <a href="#" id="@entry.GetName()"><h5>@entry.GetName()</h5></a>
+        <a href="/stylist_clients/@entry.GetId()" id="@entry.GetName()"><h5>@entry.GetName()</h5></a>
         </div>
     }
     </div>

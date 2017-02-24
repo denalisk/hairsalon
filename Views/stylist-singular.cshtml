@@ -1,0 +1,30 @@
+@{
+    Layout="Shared/_Layout.cshtml";
+}
+<div class="col s6">
+    <h4>@Model.GetName()</h4>
+        <a href="/new-client/@Model.GetId()"><button class="btn green" type="submit" name="button">New Client</button></a>
+    @if(@Model.GetClients().Count == 0)
+    {
+        <h4>@Model.GetName() has no clients currently</h4>
+    }
+    else
+    {
+        @foreach(var entry in @Model.GetClients())
+        {
+            <div class="card">
+                <div class="container">
+                    <ul>
+                        Name: @entry.GetName()
+                        <li>Hair color: @entry.GetHairColor()</li>
+                        <a href="/update-client/@entry.GetId()">Change Stylist</a>
+                        <form class="delete-client" action="/delete_client/@entry.GetId()" method="post">
+                            <button class="btn red" type="submit" name="button">Delete</button>
+                        </form>
+
+                    </ul>
+                </div>
+            </div>
+        }
+    }
+</div>

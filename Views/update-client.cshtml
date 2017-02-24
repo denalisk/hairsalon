@@ -1,0 +1,12 @@
+@{
+    Layout="Shared/_Layout.cshtml";
+}
+<div class="col s6">
+    <form class="" action="/update/@Model.GetId()" method="post">
+        <h5>Reassign @Model.GetName() to a new Stylist:</h5>
+        <input type="text" name="new-stylist-name" placeholder="New stylist name">
+        <input class="hidden" type="text" name="new-client-haircolor" value="@Model.GetHairColor()">
+        <input class="hidden" type="text" name="new-client-name" value="@Model.GetName()">
+        <button class="btn grey" type="submit" name="button">Make Change</button>
+    </form>
+</div>

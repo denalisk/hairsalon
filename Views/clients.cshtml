@@ -5,12 +5,10 @@
 <div class="col s6">
     @foreach(var entry in Model)
     {
-
+        <div class="client-holder">
+        <h5>@entry.GetName()</h5>
+        <h6>Preferred Hair Color: @entry.GetHairColor()</h6>
+        <h6>Current Stylist: @entry.GetStylistName()</h6>
+        </div>
     }
-</div>
-
-<div class="client-holder">
-    <h5>@entry.GetName()</h5>
-    <h6>Preferred Hair Color: @entry.GetHairColor()</h6>
-    <h6>Current Stylist: @entry.GetStylistName()</h6>    
 </div>

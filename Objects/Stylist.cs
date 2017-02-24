@@ -101,6 +101,25 @@ namespace HairSalonApp
             return foundStylist;
         }
 
+        public void Update(string newName)
+        {
+            // Updates a Stylists information in the database and alters the local stylist
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("UPDATE stylists SET name=@NewName OUTPUT INSERTED.name WHERE id=@TargetId", conn);
+            cmd.Parameters.Add(new SqlParameter("@NewName", newName));
+            cmd.Parameters.Add(new SqlParameter("@TargetId", this.GetId()));
+            SqlDataReader rdr = cmd.ExecuteReader();
+
+            while(rdr.Read())
+            {
+                this.SetName(rdr.GetString(0));
+            }
+
+            DB.CloseSqlConnection(rdr, conn);
+        }
+
 
 
 

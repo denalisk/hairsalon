@@ -148,6 +148,27 @@ namespace HairSalonApp
 
         }
 
+        [Fact]
+        public void Stylist_Save_NoSaveOnDuplicate()
+        {
+            // Arrange
+            Stylist firstStylist = new Stylist("Bob");
+            Stylist secondStylist = new Stylist("Jenny");
+            firstStylist.Save();
+            secondStylist.Save();
+            Stylist dupeStylist = new Stylist("Bob");
+
+
+            List<Stylist> testList = new List<Stylist>{firstStylist, secondStylist};
+
+            // Act
+            dupeStylist.Save();
+
+            // Assert
+            Assert.Equal(2, Stylist.GetAll().Count);
+
+        }
+
 
         [Fact]
         public void TEST1()

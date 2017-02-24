@@ -60,6 +60,7 @@ namespace HairSalonApp
 
         public void Save()
         {
+            // Adds a local Stylist Object to the database
             SqlConnection conn = DB.Connection();
             conn.Open();
 
@@ -77,6 +78,7 @@ namespace HairSalonApp
 
         public static Stylist Find(int targetId)
         {
+            // Looks in the database for a stylist with the given id, returns it as a Stylist Object if found, else returns a Stylist object with null values
             SqlConnection conn = DB.Connection();
             conn.Open();
 

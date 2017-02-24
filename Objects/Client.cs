@@ -88,31 +88,37 @@ namespace HairSalonApp
             DB.CloseSqlConnection(rdr, conn);
         }
 
-        // public static Client Find(int targetId)
-        // {
-        //     // Looks in the database for a client with the given id, returns it as a Client Object if found, else returns a Client object with null values
-        //     SqlConnection conn = DB.Connection();
-        //     conn.Open();
-        //
-        //     SqlCommand cmd = new SqlCommand("SELECT * FROM clients WHERE id=@TargetId;", conn);
-        //     cmd.Parameters.Add(new SqlParameter("@TargetId", targetId));
-        //     SqlDataReader rdr = cmd.ExecuteReader();
-        //
-        //     string newName = null;
-        //     int newId = 0;
-        //
-        //     while(rdr.Read())
-        //     {
-        //         newName = rdr.GetString(1);
-        //         newId = rdr.GetInt32(0);
-        //     }
-        //
-        //     Client foundClient = new Client(newName, newId);
-        //
-        //     DB.CloseSqlConnection(rdr, conn);
-        //     return foundClient;
-        // }
-        //
+        public static Client Find(int targetId)
+        {
+            // Looks in the database for a client with the given id, returns it as a Client Object if found, else returns a Client object with null values
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("SELECT * FROM clients WHERE id=@TargetId;", conn);
+            cmd.Parameters.Add(new SqlParameter("@TargetId", targetId));
+            SqlDataReader rdr = cmd.ExecuteReader();
+
+            string foundName = null;
+            int foundId = 0;
+            int foundStylistId = 0;
+            DateTime foundDate = DateTime.Now;
+            string foundHairColor = null;
+
+            while(rdr.Read())
+            {
+                foundName = rdr.GetString(2);
+                foundId = rdr.GetInt32(0);
+                foundStylistId = rdr.GetInt32(1);
+                foundDate = rdr.GetDateTime(4);
+                foundHairColor = rdr.GetString(3);
+            }
+
+            Client foundClient = new Client(foundName, foundStylistId, foundHairColor, foundDate, foundId);
+
+            DB.CloseSqlConnection(rdr, conn);
+            return foundClient;
+        }
+
         // public void Update(string newName)
         // {
         //     // Updates a Clients information in the database and alters the local client

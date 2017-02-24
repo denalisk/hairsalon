@@ -131,6 +131,25 @@ namespace HairSalonApp
         }
 
         [Fact]
+        public void Stylist_IsNewStylist_ReturnNegOneForTrueOtherwiseId()
+        {
+            // Arrange
+            Stylist firstStylist = new Stylist("Bob");
+            Stylist secondStylist = new Stylist("Jenny");
+            firstStylist.Save();
+            secondStylist.Save();
+            Stylist dupeStylist = new Stylist("Bob");
+
+            // Act
+            int result = dupeStylist.IsNewStylist();
+
+            // Assert
+            Assert.Equal(firstStylist.GetId(), dupeStylist.IsNewStylist());
+
+        }
+
+
+        [Fact]
         public void TEST1()
         {
             // Arrange

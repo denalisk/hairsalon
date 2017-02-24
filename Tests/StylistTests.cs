@@ -36,6 +36,32 @@ namespace HairSalonApp
         }
 
         [Fact]
+        public void Stylist_Save_SavesToDatabase()
+        {
+            // Arrange
+            Stylist firstStylist = new Stylist("Bob");
+            List<Stylist> testList = new List<Stylist>{firstStylist};
+
+            // Act
+            firstStylist.Save();
+
+            // Assert
+            Assert.Equals(testList, Stylist.GetAll());
+
+        }
+
+        [Fact]
+        public void Stylist_Save_AltersLocalId()
+        {
+            // Arrange
+
+            // Act
+
+            // Assert
+
+        }
+
+        [Fact]
         public void TEST1()
         {
             // Arrange

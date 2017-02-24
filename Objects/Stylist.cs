@@ -39,6 +39,7 @@ namespace HairSalonApp
 
         public static List<Stylist> GetAll()
         {
+            // Returns a list of all the stylists in the stylist table
             List<Stylist> allStylists = new List<Stylist> {};
 
             SqlConnection conn = DB.Connection();
@@ -79,6 +80,7 @@ namespace HairSalonApp
 
         public static void DeleteAll()
         {
+            // Deletes all stylists in the stylist table
             DB.TableDeleteAll("stylists");
         }
     }

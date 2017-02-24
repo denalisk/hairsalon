@@ -169,6 +169,23 @@ namespace HairSalonApp
 
         }
 
+        [Fact]
+        public void Stylist_GetClients_ReturnsListOfClientsAttachedToAStylist()
+        {
+            // Arrange
+            Stylist firstStylist = new Stylist("Lauren");
+            firstStylist.Save();
+            Client firstClient = new Client("Bob", firstStylist.GetId(), "Brown", System.DateTime.Now);
+            Client secondClient = new Client("Jenny", firstStylist.GetId(), "Brown", System.DateTime.Now);
+            firstClient.Save();
+            secondClient.Save();
+            List<Client> testList = new List<Client>{firstClient, secondClient};
+
+            // Act, Assert
+            Assert.Equal(testList, firstStylist.GetClients());
+
+        }
+
 
         [Fact]
         public void TEST1()
@@ -185,6 +202,7 @@ namespace HairSalonApp
         public void Dispose()
         {
             Stylist.DeleteAll();
+            Client.DeleteAll();
         }
     }
 }

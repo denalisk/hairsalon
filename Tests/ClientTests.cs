@@ -191,19 +191,18 @@ namespace HairSalonApp
 
         }
 
+        [Fact]
+        public void TEST1()
+        {
+            // Arrange
+            Stylist firstStylist = new Stylist("Lauren");
+            firstStylist.Save();
 
-        // [Fact]
-        // public void TEST1()
-        // {
-        //     // Arrange
-            // Stylist firstStylist = new Stylist("Lauren");
-            // firstStylist.Save();
-        //
-        //     // Act
-        //
-        //     // Assert
-        //
-        // }
+            // Act
+
+            // Assert
+
+        }
 
         public void Dispose()
         {

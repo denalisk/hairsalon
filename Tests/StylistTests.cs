@@ -80,6 +80,22 @@ namespace HairSalonApp
         }
 
         [Fact]
+        public void Stylist_Update_AlterSavedStylist()
+        {
+            // Arrange
+            Stylist firstStylist = new Stylist("Bob");
+            firstStylist.Save();
+            int targetId = firstStylist.GetId();
+
+            // Act
+            firstStylist.Update("Robert");
+
+            // Assert
+            Assert.Equal("Robert", Stylist.Find(targetId).GetName());
+
+        }
+
+        [Fact]
         public void TEST1()
         {
             // Arrange

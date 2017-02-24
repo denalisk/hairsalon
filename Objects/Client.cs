@@ -165,29 +165,29 @@ namespace HairSalonApp
             }
         }
 
-        // public static List<Client> Search(string targetName)
-        // {
-        //     // Returns a list of Clients from the database if the name is the same
-        //     List<Client> foundClients = new List<Client> {};
-        //
-        //     SqlConnection conn = DB.Connection();
-        //     conn.Open();
-        //
-        //     SqlCommand cmd = new SqlCommand("SELECT * FROM clients WHERE name LIKE @TargetName;", conn);
-        //     cmd.Parameters.Add(new SqlParameter("@TargetName", "%" + targetName + "%"));
-        //
-        //     SqlDataReader rdr = cmd.ExecuteReader();
-        //
-        //     while(rdr.Read())
-        //     {
-        //         foundClients.Add(new Client(rdr.GetString(1), rdr.GetInt32(0)));
-        //     }
-        //     DB.CloseSqlConnection(rdr, conn);
-        //
-        //     return foundClients;
-        //
-        // }
-        //
+        public static List<Client> Search(string targetName)
+        {
+            // Returns a list of Clients from the database if the name is the same
+            List<Client> foundClients = new List<Client> {};
+
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("SELECT * FROM clients WHERE name LIKE @TargetName;", conn);
+            cmd.Parameters.Add(new SqlParameter("@TargetName", "%" + targetName + "%"));
+
+            SqlDataReader rdr = cmd.ExecuteReader();
+
+            while(rdr.Read())
+            {
+                foundClients.Add(new Client(rdr.GetString(2), rdr.GetInt32(1), rdr.GetString(3), rdr.GetDateTime(4), rdr.GetInt32(0)));
+            }
+            DB.CloseSqlConnection(rdr, conn);
+
+            return foundClients;
+
+        }
+
         // public int IsNewClient()
         // {
         //     // Checks if the client already exists in the database. Returns the client Id if already exists, else returns -1

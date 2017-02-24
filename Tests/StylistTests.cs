@@ -104,13 +104,28 @@ namespace HairSalonApp
             List<Stylist> testList = new List<Stylist>{secondStylist};
 
             // Act
-
             firstStylist.Save();
             secondStylist.Save();
             firstStylist.Delete();
 
             // Assert
             Assert.Equal(testList, Stylist.GetAll());
+
+        }
+
+        [Fact]
+        public void Stylist_Search_ReturnStylistWithTargetName()
+        {
+            // Arrange
+            Stylist firstStylist = new Stylist("Bob");
+            Stylist secondStylist = new Stylist("Jenny");
+
+            // Act
+            firstStylist.Save();
+            secondStylist.Save();
+
+            // Assert
+            Assert.Equal(firstStylist, Stylist.Search("Bob"));
 
         }
 

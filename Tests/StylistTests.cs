@@ -119,13 +119,14 @@ namespace HairSalonApp
             // Arrange
             Stylist firstStylist = new Stylist("Bob");
             Stylist secondStylist = new Stylist("Jenny");
+            List<Stylist> testList = new List<Stylist>{secondStylist};
 
             // Act
             firstStylist.Save();
             secondStylist.Save();
 
             // Assert
-            Assert.Equal(firstStylist, Stylist.Search("Bob"));
+            Assert.Equal(testList, Stylist.Search("Jen"));
 
         }
 

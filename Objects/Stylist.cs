@@ -136,6 +136,29 @@ namespace HairSalonApp
             }
         }
 
+        public static List<Stylist> Search(string targetName)
+        {
+            // Returns a list of Stylists from the database if the name is the same
+            List<Stylist> foundStylists = new List<Stylist> {};
+
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("SELECT * FROM stylists WHERE name LIKE @TargetName;", conn);
+            cmd.Parameters.Add(new SqlParameter("@TargetName", "%" + targetName + "%"));
+
+            SqlDataReader rdr = cmd.ExecuteReader();
+
+            while(rdr.Read())
+            {
+                foundStylists.Add(new Stylist(rdr.GetString(1), rdr.GetInt32(0)));
+            }
+            DB.CloseSqlConnection(rdr, conn);
+
+            return foundStylists;
+
+        }
+
 
 
 

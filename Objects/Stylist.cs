@@ -17,6 +17,7 @@ namespace HairSalonApp
         }
         public override bool Equals(System.Object otherStylist)
         {
+            // This override will allow Stylist.Equals to test each contained value as an identity
             if(!(otherStylist is Stylist))
             {
                 return false;
@@ -32,6 +33,7 @@ namespace HairSalonApp
 
         public override int GetHashCode()
         {
+            // This override will allow Stylist.GetHashCode to function with the override .Equals
             return this.GetName().GetHashCode();
         }
 

@@ -183,6 +183,25 @@ namespace HairSalonApp
             return resultId;
         }
 
+        public List<Client> GetClients()
+        {
+            List<Client> foundClients = new List<Client> {};
+
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("SELECT * FROM clients WHERE stylist_id=@TargetId;", conn);
+            cmd.Parameters.Add(new SqlParameter("@TargetId", this.GetId()));
+            SqlDataReader rdr = cmd.ExecuteReader();
+
+            while(rdr.Read())
+            {
+                foundClients.Add(new Client(rdr.GetString(2), rdr.GetInt32(1), rdr.GetString(3), rdr.GetDateTime(4), rdr.GetInt32(0)));
+            }
+            DB.CloseSqlConnection(rdr, conn);
+            return foundClients;
+        }
+
 
 
 

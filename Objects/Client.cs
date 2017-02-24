@@ -119,25 +119,25 @@ namespace HairSalonApp
             return foundClient;
         }
 
-        // public void Update(string newName)
-        // {
-        //     // Updates a Clients information in the database and alters the local client
-        //     SqlConnection conn = DB.Connection();
-        //     conn.Open();
-        //
-        //     SqlCommand cmd = new SqlCommand("UPDATE clients SET name=@NewName OUTPUT INSERTED.name WHERE id=@TargetId", conn);
-        //     cmd.Parameters.Add(new SqlParameter("@NewName", newName));
-        //     cmd.Parameters.Add(new SqlParameter("@TargetId", this.GetId()));
-        //     SqlDataReader rdr = cmd.ExecuteReader();
-        //
-        //     while(rdr.Read())
-        //     {
-        //         this.SetName(rdr.GetString(0));
-        //     }
-        //
-        //     DB.CloseSqlConnection(rdr, conn);
-        // }
-        //
+        public void Update(string newName, string newHairColor, int newStylistId)
+        {
+            // Updates a Clients information in the database and alters the local client
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("UPDATE clients SET name=@NewName, hair_color=@NewHairColor, stylist_id=@NewStylistId WHERE id=@TargetId", conn);
+            cmd.Parameters.Add(new SqlParameter("@NewName", newName));
+            cmd.Parameters.Add(new SqlParameter("@NewHairColor", newHairColor));
+            cmd.Parameters.Add(new SqlParameter("@NewStylistId", newStylistId));
+            cmd.Parameters.Add(new SqlParameter("@TargetId", this.GetId()));
+            cmd.ExecuteNonQuery();
+
+            if (conn != null)
+            {
+                conn.Close();
+            }
+        }
+
         // public void Delete()
         // {
         //     // Delete a client from the databas. Currently does nothing to their clients

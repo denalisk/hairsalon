@@ -91,24 +91,24 @@ namespace HairSalonApp
 
         }
 
-        // [Fact]
-        // public void Client_Update_AlterSavedClient()
-        // {
-        //     // Arrange
-            // Stylist firstStylist = new Stylist("Lauren");
-            // firstStylist.Save();
-        //     Client firstClient = new Client("Bob", firstStylist.GetId(), "Brown", System.DateTime.Now);
-        //     firstClient.Save();
-        //     int targetId = firstClient.GetId();
-        //
-        //     // Act
-        //     firstClient.Update("Robert");
-        //
-        //     // Assert
-        //     Assert.Equal("Robert", Client.Find(targetId).GetName());
-        //
-        // }
-        //
+        [Fact]
+        public void Client_Update_AlterSavedClient()
+        {
+            // Arrange
+            Stylist firstStylist = new Stylist("Lauren");
+            firstStylist.Save();
+            Client firstClient = new Client("Bob", firstStylist.GetId(), "Brown", System.DateTime.Now);
+            firstClient.Save();
+            int targetId = firstClient.GetId();
+
+            // Act
+            firstClient.Update("Robert", "Brown", firstStylist.GetId());
+
+            // Assert
+            Assert.Equal("Robert", Client.Find(targetId).GetName());
+
+        }
+
         // [Fact]
         // public void Client_Delete_RemoveInstanceFromDatabase()
         // {

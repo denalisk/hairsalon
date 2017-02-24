@@ -168,30 +168,30 @@ namespace HairSalonApp
 
         }
 
-        // [Fact]
-        // public void Client_Save_NoSaveOnDuplicate()
-        // {
-        //     // Arrange
-            // Stylist firstStylist = new Stylist("Lauren");
-            // firstStylist.Save();
-        //     Client firstClient = new Client("Bob", firstStylist.GetId(), "Brown", System.DateTime.Now);
-        //     Client secondClient = new Client("Jenny", firstStylist.GetId(), "Brown", System.DateTime.Now);
-        //     firstClient.Save();
-        //     secondClient.Save();
-        //     Client dupeClient = new Client("Bob", firstStylist.GetId(), "Brown", System.DateTime.Now);
-        //
-        //
-        //     List<Client> testList = new List<Client>{firstClient, secondClient};
-        //
-        //     // Act
-        //     dupeClient.Save();
-        //
-        //     // Assert
-        //     Assert.Equal(2, Client.GetAll().Count);
-        //
-        // }
-        //
-        //
+        [Fact]
+        public void Client_Save_NoSaveOnDuplicate()
+        {
+            // Arrange
+            Stylist firstStylist = new Stylist("Lauren");
+            firstStylist.Save();
+            Client firstClient = new Client("Bob", firstStylist.GetId(), "Brown", System.DateTime.Now);
+            Client secondClient = new Client("Jenny", firstStylist.GetId(), "Brown", System.DateTime.Now);
+            firstClient.Save();
+            secondClient.Save();
+            Client dupeClient = new Client("Bob", firstStylist.GetId(), "Brown", System.DateTime.Now);
+
+
+            List<Client> testList = new List<Client>{firstClient, secondClient};
+
+            // Act
+            dupeClient.Save();
+
+            // Assert
+            Assert.Equal(2, Client.GetAll().Count);
+
+        }
+
+
         // [Fact]
         // public void TEST1()
         // {

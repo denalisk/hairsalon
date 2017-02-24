@@ -109,26 +109,26 @@ namespace HairSalonApp
 
         }
 
-        // [Fact]
-        // public void Client_Delete_RemoveInstanceFromDatabase()
-        // {
-        //     // Arrange
-            // Stylist firstStylist = new Stylist("Lauren");
-            // firstStylist.Save();
-        //     Client firstClient = new Client("Bob", firstStylist.GetId(), "Brown", System.DateTime.Now);
-        //     Client secondClient = new Client("Jenny");
-        //     List<Client> testList = new List<Client>{secondClient};
-        //
-        //     // Act
-        //     firstClient.Save();
-        //     secondClient.Save();
-        //     firstClient.Delete();
-        //
-        //     // Assert
-        //     Assert.Equal(testList, Client.GetAll());
-        //
-        // }
-        //
+        [Fact]
+        public void Client_Delete_RemoveInstanceFromDatabase()
+        {
+            // Arrange
+            Stylist firstStylist = new Stylist("Lauren");
+            firstStylist.Save();
+            Client firstClient = new Client("Bob", firstStylist.GetId(), "Brown", System.DateTime.Now);
+            Client secondClient = new Client("Jenny", firstStylist.GetId(), "Brown", System.DateTime.Now);
+            List<Client> testList = new List<Client>{secondClient};
+
+            // Act
+            firstClient.Save();
+            secondClient.Save();
+            firstClient.Delete();
+
+            // Assert
+            Assert.Equal(testList, Client.GetAll());
+
+        }
+
         // [Fact]
         // public void Client_Search_ReturnClientWithTargetName()
         // {
@@ -136,7 +136,7 @@ namespace HairSalonApp
             // Stylist firstStylist = new Stylist("Lauren");
             // firstStylist.Save();
         //     Client firstClient = new Client("Bob", firstStylist.GetId(), "Brown", System.DateTime.Now);
-        //     Client secondClient = new Client("Jenny");
+        //     Client secondClient = new Client("Jenny", firstStylist.GetId(), "Brown", System.DateTime.Now);
         //     List<Client> testList = new List<Client>{secondClient};
         //
         //     // Act
@@ -155,7 +155,7 @@ namespace HairSalonApp
             // Stylist firstStylist = new Stylist("Lauren");
             // firstStylist.Save();
         //     Client firstClient = new Client("Bob", firstStylist.GetId(), "Brown", System.DateTime.Now);
-        //     Client secondClient = new Client("Jenny");
+        //     Client secondClient = new Client("Jenny", firstStylist.GetId(), "Brown", System.DateTime.Now);
         //     firstClient.Save();
         //     secondClient.Save();
         //     Client dupeClient = new Client("Blake");
@@ -175,7 +175,7 @@ namespace HairSalonApp
             // Stylist firstStylist = new Stylist("Lauren");
             // firstStylist.Save();
         //     Client firstClient = new Client("Bob", firstStylist.GetId(), "Brown", System.DateTime.Now);
-        //     Client secondClient = new Client("Jenny");
+        //     Client secondClient = new Client("Jenny", firstStylist.GetId(), "Brown", System.DateTime.Now);
         //     firstClient.Save();
         //     secondClient.Save();
         //     Client dupeClient = new Client("Bob", firstStylist.GetId(), "Brown", System.DateTime.Now);

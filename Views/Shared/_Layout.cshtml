@@ -11,6 +11,32 @@
         <title>Hair Salon</title>
     </head>
     <body>
+        <div class="row">
+            <div class="col s3">
+                <div class="nav-column">
+                    <div class="home-button">
+                        <a href="/"><button>Home</button></a>
+                    </div>
+                    <div class="stylists-button">
+                        <div class="card">
+                            <a href="/stylists"><h5>Stylists</h5></a>
+                            <button id="add-stylist" class="add-stylist-btn btn-floating waves-effect waves-light red" type="button" name="button"><i class="material-icons">+</i></button>
+                            <div class="stylist-form">
+                                <form class="" action="/stylists" method="post">
+                                    <input type="text" id="stylist-name" name="stylist-name" placeholder="Stylist name" value="" required>
+                                    <button type="submit" name="create-stylist" class="btn blue right">Add Stylist</button>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clients-button">
+
+                    </div>
+                </div>
+            </div>
+            @RenderBody()
+        </div>
 
     </body>
 </html>

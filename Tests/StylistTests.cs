@@ -22,13 +22,16 @@ namespace HairSalonApp
         }
 
         [Fact]
-        public void TEST()
+        public void Stylist_EqualsIdentityTest_ReturnsTrueForIdenticalObjects()
         {
             // Arrange
+            Stylist firstStylist = new Stylist("Bob");
 
             // Act
+            Stylist secondStylist = new Stylist("Bob");
 
             // Assert
+            Assert.Equal(firstStylist, secondStylist);
 
         }
 

@@ -70,22 +70,25 @@ namespace HairSalonApp
         public void Save()
         {
             // Adds a local Client Object to the database, won't save if it's a duplicate client
-            SqlConnection conn = DB.Connection();
-            conn.Open();
-
-            SqlCommand cmd = new SqlCommand("INSERT INTO clients (name, stylist_id, hair_color, creation_date) OUTPUT INSERTED.id VALUES (@NewName, @StylistId, @HairColor, @Date)", conn);
-            cmd.Parameters.Add(new SqlParameter("@NewName", this.GetName()));
-            cmd.Parameters.Add(new SqlParameter("@StylistId", this.GetStylistId()));
-            cmd.Parameters.Add(new SqlParameter("@HairColor", this.GetHairColor()));
-            cmd.Parameters.Add(new SqlParameter("@Date", this.GetDate()));
-
-            SqlDataReader rdr = cmd.ExecuteReader();
-
-            while(rdr.Read())
+            if (this.IsNewClient() == -1)
             {
-                this.SetId(rdr.GetInt32(0));
+                SqlConnection conn = DB.Connection();
+                conn.Open();
+
+                SqlCommand cmd = new SqlCommand("INSERT INTO clients (name, stylist_id, hair_color, creation_date) OUTPUT INSERTED.id VALUES (@NewName, @StylistId, @HairColor, @Date)", conn);
+                cmd.Parameters.Add(new SqlParameter("@NewName", this.GetName()));
+                cmd.Parameters.Add(new SqlParameter("@StylistId", this.GetStylistId()));
+                cmd.Parameters.Add(new SqlParameter("@HairColor", this.GetHairColor()));
+                cmd.Parameters.Add(new SqlParameter("@Date", this.GetDate()));
+
+                SqlDataReader rdr = cmd.ExecuteReader();
+
+                while(rdr.Read())
+                {
+                    this.SetId(rdr.GetInt32(0));
+                }
+                DB.CloseSqlConnection(rdr, conn);
             }
-            DB.CloseSqlConnection(rdr, conn);
         }
 
         public static Client Find(int targetId)

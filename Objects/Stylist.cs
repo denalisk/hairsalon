@@ -60,20 +60,23 @@ namespace HairSalonApp
 
         public void Save()
         {
-            // Adds a local Stylist Object to the database
-            SqlConnection conn = DB.Connection();
-            conn.Open();
-
-            SqlCommand cmd = new SqlCommand("INSERT INTO stylists (name) OUTPUT INSERTED.id VALUES (@NewName)", conn);
-            cmd.Parameters.Add(new SqlParameter("@NewName", this.GetName()));
-
-            SqlDataReader rdr = cmd.ExecuteReader();
-
-            while(rdr.Read())
+            // Adds a local Stylist Object to the database, won't save if it's a duplicate stylist
+            if (this.IsNewStylist() == -1)
             {
-                this.SetId(rdr.GetInt32(0));
+                SqlConnection conn = DB.Connection();
+                conn.Open();
+
+                SqlCommand cmd = new SqlCommand("INSERT INTO stylists (name) OUTPUT INSERTED.id VALUES (@NewName)", conn);
+                cmd.Parameters.Add(new SqlParameter("@NewName", this.GetName()));
+
+                SqlDataReader rdr = cmd.ExecuteReader();
+
+                while(rdr.Read())
+                {
+                    this.SetId(rdr.GetInt32(0));
+                }
+                DB.CloseSqlConnection(rdr, conn);
             }
-            DB.CloseSqlConnection(rdr, conn);
         }
 
         public static Stylist Find(int targetId)

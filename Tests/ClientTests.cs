@@ -148,26 +148,26 @@ namespace HairSalonApp
 
         }
 
-        // [Fact]
-        // public void Client_IsNewClient_ReturnNegOneForTrueOtherwiseId()
-        // {
-        //     // Arrange
-            // Stylist firstStylist = new Stylist("Lauren");
-            // firstStylist.Save();
-        //     Client firstClient = new Client("Bob", firstStylist.GetId(), "Brown", System.DateTime.Now);
-        //     Client secondClient = new Client("Jenny", firstStylist.GetId(), "Brown", System.DateTime.Now);
-        //     firstClient.Save();
-        //     secondClient.Save();
-        //     Client dupeClient = new Client("Blake");
-        //
-        //     // Act
-        //     int result = dupeClient.IsNewClient();
-        //
-        //     // Assert
-        //     Assert.Equal(-1, result);
-        //
-        // }
-        //
+        [Fact]
+        public void Client_IsNewClient_ReturnNegOneForTrueOtherwiseId()
+        {
+            // Arrange
+            Stylist firstStylist = new Stylist("Lauren");
+            firstStylist.Save();
+            Client firstClient = new Client("Bob", firstStylist.GetId(), "Brown", System.DateTime.Now);
+            Client secondClient = new Client("Jenny", firstStylist.GetId(), "Brown", System.DateTime.Now);
+            firstClient.Save();
+            secondClient.Save();
+            Client dupeClient = new Client("Blake");
+
+            // Act
+            int result = dupeClient.IsNewClient();
+
+            // Assert
+            Assert.Equal(-1, result);
+
+        }
+
         // [Fact]
         // public void Client_Save_NoSaveOnDuplicate()
         // {

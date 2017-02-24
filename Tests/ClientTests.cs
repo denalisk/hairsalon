@@ -27,10 +27,12 @@ namespace HairSalonApp
         // public void Client_EqualsIdentityTest_ReturnsTrueForIdenticalObjects()
         // {
         //     // Arrange
-        //     Client firstClient = new Client("Bob");
+        //     Stylist firstStylist = new Stylist("Bob");
+        //     firstStylist.Save();
+        //     Client firstClient = new Client("Bob", newStylist.GetId(), "Brown", DB.SqlFormatDate(System.DateTime.Now));
         //
         //     // Act
-        //     Client secondClient = new Client("Bob");
+        //     Client secondClient = new Client("Bob", newStylist.GetId(), "Brown", DB.SqlFormatDate(System.DateTime.Now));
         //
         //     // Assert
         //     Assert.Equal(firstClient, secondClient);
@@ -41,7 +43,7 @@ namespace HairSalonApp
         // public void Client_Save_SavesToDatabase()
         // {
         //     // Arrange
-        //     Client firstClient = new Client("Bob");
+        //     Client firstClient = new Client("Bob", newStylist.GetId(), "Brown", DB.SqlFormatDate(System.DateTime.Now));
         //     List<Client> testList = new List<Client>{firstClient};
         //
         //     // Act
@@ -56,7 +58,7 @@ namespace HairSalonApp
         // public void Client_Save_AltersLocalId()
         // {
         //     // Arrange
-        //     Client firstClient = new Client("Bob");
+        //     Client firstClient = new Client("Bob", newStylist.GetId(), "Brown", DB.SqlFormatDate(System.DateTime.Now));
         //     List<Client> testList = new List<Client>{firstClient};
         //
         //     // Act
@@ -70,7 +72,7 @@ namespace HairSalonApp
         // public void Client_FindById_ReturnIdenticalObject()
         // {
         //     // Arrange
-        //     Client firstClient = new Client("Bob");
+        //     Client firstClient = new Client("Bob", newStylist.GetId(), "Brown", DB.SqlFormatDate(System.DateTime.Now));
         //     firstClient.Save();
         //
         //     // Act
@@ -85,7 +87,7 @@ namespace HairSalonApp
         // public void Client_Update_AlterSavedClient()
         // {
         //     // Arrange
-        //     Client firstClient = new Client("Bob");
+        //     Client firstClient = new Client("Bob", newStylist.GetId(), "Brown", DB.SqlFormatDate(System.DateTime.Now));
         //     firstClient.Save();
         //     int targetId = firstClient.GetId();
         //
@@ -101,7 +103,7 @@ namespace HairSalonApp
         // public void Client_Delete_RemoveInstanceFromDatabase()
         // {
         //     // Arrange
-        //     Client firstClient = new Client("Bob");
+        //     Client firstClient = new Client("Bob", newStylist.GetId(), "Brown", DB.SqlFormatDate(System.DateTime.Now));
         //     Client secondClient = new Client("Jenny");
         //     List<Client> testList = new List<Client>{secondClient};
         //
@@ -119,7 +121,7 @@ namespace HairSalonApp
         // public void Client_Search_ReturnClientWithTargetName()
         // {
         //     // Arrange
-        //     Client firstClient = new Client("Bob");
+        //     Client firstClient = new Client("Bob", newStylist.GetId(), "Brown", DB.SqlFormatDate(System.DateTime.Now));
         //     Client secondClient = new Client("Jenny");
         //     List<Client> testList = new List<Client>{secondClient};
         //
@@ -136,7 +138,7 @@ namespace HairSalonApp
         // public void Client_IsNewClient_ReturnNegOneForTrueOtherwiseId()
         // {
         //     // Arrange
-        //     Client firstClient = new Client("Bob");
+        //     Client firstClient = new Client("Bob", newStylist.GetId(), "Brown", DB.SqlFormatDate(System.DateTime.Now));
         //     Client secondClient = new Client("Jenny");
         //     firstClient.Save();
         //     secondClient.Save();
@@ -154,11 +156,11 @@ namespace HairSalonApp
         // public void Client_Save_NoSaveOnDuplicate()
         // {
         //     // Arrange
-        //     Client firstClient = new Client("Bob");
+        //     Client firstClient = new Client("Bob", newStylist.GetId(), "Brown", DB.SqlFormatDate(System.DateTime.Now));
         //     Client secondClient = new Client("Jenny");
         //     firstClient.Save();
         //     secondClient.Save();
-        //     Client dupeClient = new Client("Bob");
+        //     Client dupeClient = new Client("Bob", newStylist.GetId(), "Brown", DB.SqlFormatDate(System.DateTime.Now));
         //
         //
         //     List<Client> testList = new List<Client>{firstClient, secondClient};
@@ -186,6 +188,7 @@ namespace HairSalonApp
         public void Dispose()
         {
             Client.DeleteAll();
+            Stylist.DeleteAll();
         }
     }
 }

@@ -1,6 +1,7 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Collections.Generic;
+using System;
 
 namespace HairSalonApp
 {
@@ -31,6 +32,11 @@ namespace HairSalonApp
             SqlCommand cmd = new SqlCommand("DELETE FROM " + tableName + ";", conn);
             cmd.ExecuteNonQuery();
             conn.Close();
+        }
+
+        public static string SqlFormattedDate(DateTime newDateTime)
+        {
+            return newDateTime.ToString("yyyy-MM-dd HH:mm:ss.fff");
         }
     }
 }

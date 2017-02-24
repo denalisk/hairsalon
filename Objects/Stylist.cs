@@ -159,6 +159,27 @@ namespace HairSalonApp
 
         }
 
+        public int IsNewStylist()
+        {
+            // Checks if the stylist already exists in the database. Returns the stylist Id if already exists, else returns -1
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("SELECT * FROM stylists WHERE name=@TargetName;", conn);
+            cmd.Parameters.Add(new SqlParameter("@TargetName", this.GetName()));
+            SqlDataReader rdr = cmd.ExecuteReader();
+
+            int resultId = -1;
+
+            if(rdr.Read())
+            {
+                resultId = rdr.GetInt32(0);
+            }
+
+            DB.CloseSqlConnection(rdr, conn);
+            return resultId;
+        }
+
 
 
 

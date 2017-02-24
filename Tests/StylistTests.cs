@@ -138,13 +138,13 @@ namespace HairSalonApp
             Stylist secondStylist = new Stylist("Jenny");
             firstStylist.Save();
             secondStylist.Save();
-            Stylist dupeStylist = new Stylist("Bob");
+            Stylist dupeStylist = new Stylist("Blake");
 
             // Act
             int result = dupeStylist.IsNewStylist();
 
             // Assert
-            Assert.Equal(firstStylist.GetId(), dupeStylist.IsNewStylist());
+            Assert.Equal(-1, result);
 
         }
 

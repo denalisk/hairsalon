@@ -31,10 +31,10 @@ namespace HairSalonApp
             // Arrange
             Stylist firstStylist = new Stylist("Lauren");
             firstStylist.Save();
-            Client firstClient = new Client("Bob", firstStylist.GetId(), "Brown", DB.SqlFormattedDate(System.DateTime.Now));
+            Client firstClient = new Client("Bob", firstStylist.GetId(), "Brown", System.DateTime.Now);
 
             // Act
-            Client secondClient = new Client("Bob", firstStylist.GetId(), "Brown", DB.SqlFormattedDate(System.DateTime.Now));
+            Client secondClient = new Client("Bob", firstStylist.GetId(), "Brown", System.DateTime.Now);
 
             // Assert
             Assert.Equal(firstClient, secondClient);
@@ -47,7 +47,7 @@ namespace HairSalonApp
             // Arrange
             Stylist firstStylist = new Stylist("Lauren");
             firstStylist.Save();
-            Client firstClient = new Client("Bob", firstStylist.GetId(), "Brown", DB.SqlFormattedDate(System.DateTime.Now));
+            Client firstClient = new Client("Bob", firstStylist.GetId(), "Brown", System.DateTime.Now);
             List<Client> testList = new List<Client>{firstClient};
 
             // Act
@@ -64,7 +64,7 @@ namespace HairSalonApp
         //     // Arrange
             // Stylist firstStylist = new Stylist("Lauren");
             // firstStylist.Save();
-        //     Client firstClient = new Client("Bob", firstStylist.GetId(), "Brown", DB.SqlFormattedDate(System.DateTime.Now));
+        //     Client firstClient = new Client("Bob", firstStylist.GetId(), "Brown", System.DateTime.Now);
         //     List<Client> testList = new List<Client>{firstClient};
         //
         //     // Act
@@ -80,7 +80,7 @@ namespace HairSalonApp
         //     // Arrange
             // Stylist firstStylist = new Stylist("Lauren");
             // firstStylist.Save();
-        //     Client firstClient = new Client("Bob", firstStylist.GetId(), "Brown", DB.SqlFormattedDate(System.DateTime.Now));
+        //     Client firstClient = new Client("Bob", firstStylist.GetId(), "Brown", System.DateTime.Now);
         //     firstClient.Save();
         //
         //     // Act
@@ -97,7 +97,7 @@ namespace HairSalonApp
         //     // Arrange
             // Stylist firstStylist = new Stylist("Lauren");
             // firstStylist.Save();
-        //     Client firstClient = new Client("Bob", firstStylist.GetId(), "Brown", DB.SqlFormattedDate(System.DateTime.Now));
+        //     Client firstClient = new Client("Bob", firstStylist.GetId(), "Brown", System.DateTime.Now);
         //     firstClient.Save();
         //     int targetId = firstClient.GetId();
         //
@@ -115,7 +115,7 @@ namespace HairSalonApp
         //     // Arrange
             // Stylist firstStylist = new Stylist("Lauren");
             // firstStylist.Save();
-        //     Client firstClient = new Client("Bob", firstStylist.GetId(), "Brown", DB.SqlFormattedDate(System.DateTime.Now));
+        //     Client firstClient = new Client("Bob", firstStylist.GetId(), "Brown", System.DateTime.Now);
         //     Client secondClient = new Client("Jenny");
         //     List<Client> testList = new List<Client>{secondClient};
         //
@@ -135,7 +135,7 @@ namespace HairSalonApp
         //     // Arrange
             // Stylist firstStylist = new Stylist("Lauren");
             // firstStylist.Save();
-        //     Client firstClient = new Client("Bob", firstStylist.GetId(), "Brown", DB.SqlFormattedDate(System.DateTime.Now));
+        //     Client firstClient = new Client("Bob", firstStylist.GetId(), "Brown", System.DateTime.Now);
         //     Client secondClient = new Client("Jenny");
         //     List<Client> testList = new List<Client>{secondClient};
         //
@@ -154,7 +154,7 @@ namespace HairSalonApp
         //     // Arrange
             // Stylist firstStylist = new Stylist("Lauren");
             // firstStylist.Save();
-        //     Client firstClient = new Client("Bob", firstStylist.GetId(), "Brown", DB.SqlFormattedDate(System.DateTime.Now));
+        //     Client firstClient = new Client("Bob", firstStylist.GetId(), "Brown", System.DateTime.Now);
         //     Client secondClient = new Client("Jenny");
         //     firstClient.Save();
         //     secondClient.Save();
@@ -174,11 +174,11 @@ namespace HairSalonApp
         //     // Arrange
             // Stylist firstStylist = new Stylist("Lauren");
             // firstStylist.Save();
-        //     Client firstClient = new Client("Bob", firstStylist.GetId(), "Brown", DB.SqlFormattedDate(System.DateTime.Now));
+        //     Client firstClient = new Client("Bob", firstStylist.GetId(), "Brown", System.DateTime.Now);
         //     Client secondClient = new Client("Jenny");
         //     firstClient.Save();
         //     secondClient.Save();
-        //     Client dupeClient = new Client("Bob", firstStylist.GetId(), "Brown", DB.SqlFormattedDate(System.DateTime.Now));
+        //     Client dupeClient = new Client("Bob", firstStylist.GetId(), "Brown", System.DateTime.Now);
         //
         //
         //     List<Client> testList = new List<Client>{firstClient, secondClient};

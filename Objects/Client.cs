@@ -10,10 +10,10 @@ namespace HairSalonApp
         private int _stylistId;
         private string _name;
         private string _hairColor;
-        private string _date;
+        private DateTime _date;
         private int _id;
 
-        public Client(string newName, int newStylistId, string newHairColor, string newDate, int newId = 0)
+        public Client(string newName, int newStylistId, string newHairColor, DateTime newDate, int newId = 0)
         {
             _name = newName;
             _id = newId;
@@ -24,6 +24,7 @@ namespace HairSalonApp
         public override bool Equals(System.Object otherClient)
         {
             // This override will allow Client.Equals to test each contained value as an identity
+            // DOES NOT check the date value
             if(!(otherClient is Client))
             {
                 return false;
@@ -35,8 +36,7 @@ namespace HairSalonApp
                 bool idIdentity = this.GetId() == newClient.GetId();
                 bool hairColorIdentity = this.GetHairColor() == newClient.GetHairColor();
                 bool stylistIdIdentity = this.GetStylistId() == newClient.GetStylistId();
-                bool dateIdentity = this.GetDate() == newClient.GetDate();
-                return (nameIdentity && idIdentity && dateIdentity && stylistIdIdentity && hairColorIdentity);
+                return (nameIdentity && idIdentity && stylistIdIdentity && hairColorIdentity);
             }
         }
 
@@ -59,35 +59,35 @@ namespace HairSalonApp
 
             while(rdr.Read())
             {
-                allClients.Add(new Client(rdr.GetString(2), rdr.GetInt32(1), rdr.GetString(3), rdr.GetString(4), rdr.GetInt32(0)));
+                allClients.Add(new Client(rdr.GetString(2), rdr.GetInt32(1), rdr.GetString(3), rdr.GetDateTime(4), rdr.GetInt32(0)));
             }
 
             DB.CloseSqlConnection(rdr, conn);
 
             return allClients;
         }
-        //
-        // public void Save()
-        // {
-        //     // Adds a local Client Object to the database, won't save if it's a duplicate client
-        //     if (this.IsNewClient() == -1)
-        //     {
-        //         SqlConnection conn = DB.Connection();
-        //         conn.Open();
-        //
-        //         SqlCommand cmd = new SqlCommand("INSERT INTO clients (name) OUTPUT INSERTED.id VALUES (@NewName)", conn);
-        //         cmd.Parameters.Add(new SqlParameter("@NewName", this.GetName()));
-        //
-        //         SqlDataReader rdr = cmd.ExecuteReader();
-        //
-        //         while(rdr.Read())
-        //         {
-        //             this.SetId(rdr.GetInt32(0));
-        //         }
-        //         DB.CloseSqlConnection(rdr, conn);
-        //     }
-        // }
-        //
+
+        public void Save()
+        {
+            // Adds a local Client Object to the database, won't save if it's a duplicate client
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("INSERT INTO clients (name, stylist_id, hair_color, creation_date) OUTPUT INSERTED.id VALUES (@NewName, @StylistId, @HairColor, @Date)", conn);
+            cmd.Parameters.Add(new SqlParameter("@NewName", this.GetName()));
+            cmd.Parameters.Add(new SqlParameter("@StylistId", this.GetStylistId()));
+            cmd.Parameters.Add(new SqlParameter("@HairColor", this.GetHairColor()));
+            cmd.Parameters.Add(new SqlParameter("@Date", this.GetDate()));
+
+            SqlDataReader rdr = cmd.ExecuteReader();
+
+            while(rdr.Read())
+            {
+                this.SetId(rdr.GetInt32(0));
+            }
+            DB.CloseSqlConnection(rdr, conn);
+        }
+
         // public static Client Find(int targetId)
         // {
         //     // Looks in the database for a client with the given id, returns it as a Client Object if found, else returns a Client object with null values
@@ -227,13 +227,17 @@ namespace HairSalonApp
         {
             return _stylistId;
         }
-        public void SetDate(string newDate)
+        public void SetDate(DateTime newDate)
         {
             _date = newDate;
         }
-        public string GetDate()
+        public DateTime GetDate()
         {
             return _date;
+        }
+        public string GetStringDate()
+        {
+            return DB.SqlFormattedDate(_date);
         }
 
         public static void DeleteAll()

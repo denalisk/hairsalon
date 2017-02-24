@@ -98,14 +98,14 @@ namespace HairSalonApp
             Stylist firstStylist = new Stylist("Lauren");
             firstStylist.Save();
             Client firstClient = new Client("Bob", firstStylist.GetId(), "Brown", System.DateTime.Now);
+            Client duplicateClient = new Client("Bob", firstStylist.GetId(), "Brown", System.DateTime.Now);
             firstClient.Save();
-            int targetId = firstClient.GetId();
-
+            firstClient.SetId(0);
             // Act
-            firstClient.Update("Robert", "Brown", firstStylist.GetId());
+            firstClient.Update("Robert", "Brown", "Ralph");
 
             // Assert
-            Assert.Equal("Robert", Client.Find(targetId).GetName());
+            Assert.Equal(duplicateClient, firstClient);
 
         }
 

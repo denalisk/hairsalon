@@ -119,9 +119,20 @@ namespace HairSalonApp
             return foundClient;
         }
 
-        public void Update(string newName, string newHairColor, int newStylistId)
+        public void Update(string newName, string newHairColor, string newStylistName)
         {
-            // Updates a Clients information in the database and alters the local client
+            // Updates a Clients information in the database and alters the local client, also creates a new Stylist if there is no existing stylist by the name given
+
+            // Stylist Check section
+            Stylist newStylist = new Stylist(newStylistName);
+            int newStylistId = newStylist.IsNewStylist();
+            if (newStylistId == -1)
+            {
+                newStylist.Save();
+                newStylistId = newStylist.GetId();
+            }
+
+            // SQL section
             SqlConnection conn = DB.Connection();
             conn.Open();
 

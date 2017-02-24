@@ -74,23 +74,23 @@ namespace HairSalonApp
             Assert.Equal(testList, Client.GetAll());
         }
 
-        // [Fact]
-        // public void Client_FindById_ReturnIdenticalObject()
-        // {
-        //     // Arrange
-            // Stylist firstStylist = new Stylist("Lauren");
-            // firstStylist.Save();
-        //     Client firstClient = new Client("Bob", firstStylist.GetId(), "Brown", System.DateTime.Now);
-        //     firstClient.Save();
-        //
-        //     // Act
-        //     Client foundClient = Client.Find(firstClient.GetId());
-        //
-        //     // Assert
-        //     Assert.Equal(firstClient, foundClient);
-        //
-        // }
-        //
+        [Fact]
+        public void Client_FindById_ReturnIdenticalObject()
+        {
+            // Arrange
+            Stylist firstStylist = new Stylist("Lauren");
+            firstStylist.Save();
+            Client firstClient = new Client("Bob", firstStylist.GetId(), "Brown", System.DateTime.Now);
+            firstClient.Save();
+
+            // Act
+            Client foundClient = Client.Find(firstClient.GetId());
+
+            // Assert
+            Assert.Equal(firstClient, foundClient);
+
+        }
+
         // [Fact]
         // public void Client_Update_AlterSavedClient()
         // {

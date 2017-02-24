@@ -149,22 +149,22 @@ namespace HairSalonApp
             }
         }
 
-        // public void Delete()
-        // {
-        //     // Delete a client from the databas. Currently does nothing to their clients
-        //     SqlConnection conn = DB.Connection();
-        //     conn.Open();
-        //
-        //     SqlCommand cmd = new SqlCommand("DELETE FROM clients WHERE id=@TargetId;", conn);
-        //     cmd.Parameters.Add(new SqlParameter("@TargetId", this.GetId()));
-        //     cmd.ExecuteNonQuery();
-        //
-        //     if (conn != null)
-        //     {
-        //         conn.Close();
-        //     }
-        // }
-        //
+        public void Delete()
+        {
+            // Delete a client from the databas. Currently does nothing to their clients
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("DELETE FROM clients WHERE id=@TargetId;", conn);
+            cmd.Parameters.Add(new SqlParameter("@TargetId", this.GetId()));
+            cmd.ExecuteNonQuery();
+
+            if (conn != null)
+            {
+                conn.Close();
+            }
+        }
+
         // public static List<Client> Search(string targetName)
         // {
         //     // Returns a list of Clients from the database if the name is the same

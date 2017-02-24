@@ -96,6 +96,22 @@ namespace HairSalonApp
         }
 
         [Fact]
+        public void Stylist_Delete_RemoveInstanceFromDatabase()
+        {
+            // Arrange
+            Stylist firstStylist = new Stylist("Bob");
+            Stylist secondStylist = new Stylist("Jenny");
+            List<Stylist> testList = new List<Stylist>{secondStylist};
+
+            // Act
+            firstStylist.Delete();
+
+            // Assert
+            Assert.Equal(testList, Stylist.GetAll());
+            
+        }
+
+        [Fact]
         public void TEST1()
         {
             // Arrange

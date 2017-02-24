@@ -58,22 +58,22 @@ namespace HairSalonApp
 
         }
 
-        // [Fact]
-        // public void Client_Save_AltersLocalId()
-        // {
-        //     // Arrange
-            // Stylist firstStylist = new Stylist("Lauren");
-            // firstStylist.Save();
-        //     Client firstClient = new Client("Bob", firstStylist.GetId(), "Brown", System.DateTime.Now);
-        //     List<Client> testList = new List<Client>{firstClient};
-        //
-        //     // Act
-        //     firstClient.Save();
-        //
-        //     // Assert
-        //     Assert.Equal(testList, Client.GetAll());
-        // }
-        //
+        [Fact]
+        public void Client_Save_AltersLocalId()
+        {
+            // Arrange
+            Stylist firstStylist = new Stylist("Lauren");
+            firstStylist.Save();
+            Client firstClient = new Client("Bob", firstStylist.GetId(), "Brown", System.DateTime.Now);
+            List<Client> testList = new List<Client>{firstClient};
+
+            // Act
+            firstClient.Save();
+
+            // Assert
+            Assert.Equal(testList, Client.GetAll());
+        }
+
         // [Fact]
         // public void Client_FindById_ReturnIdenticalObject()
         // {

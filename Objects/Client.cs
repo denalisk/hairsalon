@@ -21,28 +21,31 @@ namespace HairSalonApp
             _hairColor = newHairColor;
             _date = newDate;
         }
-        // public override bool Equals(System.Object otherClient)
-        // {
-        //     // This override will allow Client.Equals to test each contained value as an identity
-        //     if(!(otherClient is Client))
-        //     {
-        //         return false;
-        //     }
-        //     else
-        //     {
-        //         Client newClient = (Client) otherClient;
-        //         bool nameIdentity = this.GetName() == newClient.GetName();
-        //         bool idIdentity = this.GetId() == newClient.GetId();
-        //         return (nameIdentity && idIdentity);
-        //     }
-        // }
-        //
-        // public override int GetHashCode()
-        // {
-        //     // This override will allow Client.GetHashCode to function with the override .Equals
-        //     return this.GetName().GetHashCode();
-        // }
-        //
+        public override bool Equals(System.Object otherClient)
+        {
+            // This override will allow Client.Equals to test each contained value as an identity
+            if(!(otherClient is Client))
+            {
+                return false;
+            }
+            else
+            {
+                Client newClient = (Client) otherClient;
+                bool nameIdentity = this.GetName() == newClient.GetName();
+                bool idIdentity = this.GetId() == newClient.GetId();
+                bool hairColorIdentity = this.GetHairColor() == newClient.GetHairColor();
+                bool stylistIdIdentity = this.GetStylistId() == newClient.GetStylistId();
+                bool dateIdentity = this.GetDate() == newClient.GetDate();
+                return (nameIdentity && idIdentity && dateIdentity && stylistIdIdentity && hairColorIdentity);
+            }
+        }
+
+        public override int GetHashCode()
+        {
+            // This override will allow Client.GetHashCode to function with the override .Equals
+            return this.GetName().GetHashCode();
+        }
+
         public static List<Client> GetAll()
         {
             // Returns a list of all the clients in the client table
@@ -192,23 +195,47 @@ namespace HairSalonApp
         //
         //
         //
-        // public void SetName(string newName)
-        // {
-        //     _name = newName;
-        // }
-        // public string GetName()
-        // {
-        //     return _name;
-        // }
-        // public void SetId(int newId)
-        // {
-        //     _id = newId;
-        // }
-        // public int GetId()
-        // {
-        //     return _id;
-        // }
-        //
+        public void SetName(string newName)
+        {
+            _name = newName;
+        }
+        public string GetName()
+        {
+            return _name;
+        }
+        public void SetId(int newId)
+        {
+            _id = newId;
+        }
+        public int GetId()
+        {
+            return _id;
+        }
+        public void SetHairColor(string newHairColor)
+        {
+            _hairColor = newHairColor;
+        }
+        public string GetHairColor()
+        {
+            return _hairColor;
+        }
+        public void SetStylistId(int newStylistId)
+        {
+            _stylistId = newStylistId;
+        }
+        public int GetStylistId()
+        {
+            return _stylistId;
+        }
+        public void SetDate(string newDate)
+        {
+            _date = newDate;
+        }
+        public string GetDate()
+        {
+            return _date;
+        }
+
         public static void DeleteAll()
         {
             // Deletes all clients in the client table

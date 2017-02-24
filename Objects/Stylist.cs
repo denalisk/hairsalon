@@ -120,6 +120,22 @@ namespace HairSalonApp
             DB.CloseSqlConnection(rdr, conn);
         }
 
+        public void Delete()
+        {
+            // Delete a stylist from the databas. Currently does nothing to their clients
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("DELETE FROM stylists WHERE id=@TargetId;", conn);
+            cmd.Parameters.Add(new SqlParameter("@TargetId", this.GetId()));
+            cmd.ExecuteNonQuery();
+
+            if (conn != null)
+            {
+                conn.Close();
+            }
+        }
+
 
 
 

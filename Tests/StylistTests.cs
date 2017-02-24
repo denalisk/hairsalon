@@ -104,11 +104,14 @@ namespace HairSalonApp
             List<Stylist> testList = new List<Stylist>{secondStylist};
 
             // Act
+
+            firstStylist.Save();
+            secondStylist.Save();
             firstStylist.Delete();
 
             // Assert
             Assert.Equal(testList, Stylist.GetAll());
-            
+
         }
 
         [Fact]

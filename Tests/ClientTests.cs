@@ -158,7 +158,7 @@ namespace HairSalonApp
             Client secondClient = new Client("Jenny", firstStylist.GetId(), "Brown", System.DateTime.Now);
             firstClient.Save();
             secondClient.Save();
-            Client dupeClient = new Client("Blake");
+            Client dupeClient = new Client("Blake", firstStylist.GetId(), "Brown", System.DateTime.Now);
 
             // Act
             int result = dupeClient.IsNewClient();

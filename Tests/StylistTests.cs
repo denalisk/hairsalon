@@ -46,7 +46,7 @@ namespace HairSalonApp
             firstStylist.Save();
 
             // Assert
-            Assert.Equals(testList, Stylist.GetAll());
+            Assert.Equal(testList, Stylist.GetAll());
 
         }
 
@@ -54,11 +54,14 @@ namespace HairSalonApp
         public void Stylist_Save_AltersLocalId()
         {
             // Arrange
+            Stylist firstStylist = new Stylist("Bob");
+            List<Stylist> testList = new List<Stylist>{firstStylist};
 
             // Act
+            firstStylist.Save();
 
             // Assert
-
+            Assert.Equal(testList, Stylist.GetAll());
         }
 
         [Fact]

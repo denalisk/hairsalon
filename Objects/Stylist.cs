@@ -58,6 +58,23 @@ namespace HairSalonApp
             return allStylists;
         }
 
+        public void Save()
+        {
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("INSERT INTO stylists (name) OUTPUT INSERTED.id VALUES (@NewName)", conn);
+            cmd.Parameters.Add(new SqlParameter("@NewName", this.GetName()));
+
+            SqlDataReader rdr = cmd.ExecuteReader();
+
+            while(rdr.Read())
+            {
+                this.SetId(rdr.GetInt32(0));
+            }
+            DB.CloseSqlConnection(rdr, conn);
+        }
+
 
 
 

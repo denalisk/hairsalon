@@ -46,7 +46,7 @@ namespace HairSalonApp
         // START Facts
         public void Dispose()
         {
-            Stylist.Delete();
+            Stylist.DeleteAll();
         }
     }
 }

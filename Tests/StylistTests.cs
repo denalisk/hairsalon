@@ -65,6 +65,21 @@ namespace HairSalonApp
         }
 
         [Fact]
+        public void Stylist_FindById_ReturnIdenticalObject()
+        {
+            // Arrange
+            Stylist firstStylist = new Stylist("Bob");
+            firstStylist.Save();
+
+            // Act
+            Stylist foundStylist = Stylist.Find(firstStylist.GetId());
+
+            // Assert
+            Assert.Equal(firstStylist, foundStylist);
+
+        }
+
+        [Fact]
         public void TEST1()
         {
             // Arrange

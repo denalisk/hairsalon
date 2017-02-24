@@ -4,8 +4,8 @@
 <div class="col s6">
     <h4>Create a new client for @Model.GetName()</h4>
     <form class="" action="/stylist_clients/@Model.GetId()" method="post">
-        <input type="text" name="client-name" placeholder="Name">
-        <input type="text" name="client-hair-color" placeholder="Hair Color">
+        <input type="text" name="client-name" placeholder="Name" required>
+        <input type="text" name="client-hair-color" placeholder="Hair Color" required>
         <button type="submit" name="button">Create</button>
     </form>
 </div>

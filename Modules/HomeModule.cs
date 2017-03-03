@@ -34,14 +34,28 @@ namespace HairSalonApp
 
             Get["/clients"] = _ =>
             {
-                return View["clients", Client.GetAll()];
+                return View["clients", ModelMaker()];
             };
             Post["/clients"] = _ =>
             {
-                Client newClient = new Client(Request.Form["client-name"], int.Parse(Request.Form["stylist-id"]), Request.Form["client-hair-color"], System.DateTime.Now);
+                Stylist newStylist = new Stylist(Request.Form["stylist-name"]);
+                newStylist.Save();
+                Client newClient = new Client(Request.Form["new-client-name"], newStylist.GetId(), Request.Form["new-client-hair-color"], System.DateTime.Now);
                 newClient.Save();
-                return View["clients", Client.GetAll()];
+                return View["clients", ModelMaker()];
             };
+
+            Delete["/clients/{id}"] = parameters =>
+            {
+                Client.Find(parameters.id).Delete();
+                return View["clients", ModelMaker()];
+            };
+            Patch["/clients/{id}"] = parameters =>
+            {
+                Client.Find(parameters.id).Update(Request.Form["update-client-name"], Request.Form["update-client-hair-color"], Request.Form["update-client-stylist"]);
+                return View["clients", ModelMaker()];
+            };
+
 
             Get["/stylist_clients/{id}"] = data =>
             {

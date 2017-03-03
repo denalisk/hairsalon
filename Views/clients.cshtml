@@ -1,14 +1,56 @@
 @{
     Layout="Shared/_Layout.cshtml";
 }
-
-<div class="col s6">
-    @foreach(var entry in Model)
-    {
-        <div class="client-holder">
-        <h5>@entry.GetName()</h5>
-        <h6>Preferred Hair Color: @entry.GetHairColor()</h6>
-        <h6>Current Stylist: @entry.GetStylistName()</h6>
-        </div>
-    }
+<h3>Client View</h3>
+<div class="row">
+    <div class="col s9">
+        <ul class="collapsible">
+            @foreach(var entry in Model["clients"])
+            {
+                <li>
+                    <div class="collapsible-header">
+                        <h5>@entry.GetName()</h5>
+                    </div>
+                    <div class="collapsible-body">
+                        <div class="client-info">
+                            <button class="client-edit-button btn right" type="button" name="button">Edit</button>
+                            <h5>Preferred Hair Color: @entry.GetHairColor()</h5>
+                            <h5>Current Stylist: @entry.GetStylistName()</h5>
+                        </div>
+                        <div class="client-edit">
+                            <form class="" action="/clients/@entry.GetId()" method="post">
+                                <input type="hidden" name="_method" value="PATCH">
+                                <div class="row">
+                                    <div class="col s6">
+                                        <label for="update-client-name">Client Name: </label>
+                                        <input class="" type="text" name="update-client-name" value="@entry.GetName()">
+                                        <label for="update-client-haircolor">Preferred Hair Color</label>
+                                        <input class="" type="text" name="update-client-haircolor" value="@entry.GetHairColor()">
+                                    </div>
+                                    <div class="col s6">
+                                        <label for="update-client-stylist">Reassign @entry.GetName() to a new Stylist:</label>
+                                        <select class="" name="update-client-stylist">
+                                            @foreach(var stylist in @Model["stylists"])
+                                            {
+                                                <option value="@stylist.GetName()">@stylist.GetName()</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="col s4">
+                                    </div>
+                                </div>
+                                <button class="my-but btn grey" type="submit" name="button">Make Change</button>
+                                <hr />
+                            </form>
+                            <button class="client-cancel-button btn grey" type="button" name="button">Cancel</button>
+                            <form class="right" action="/clients/@entry.GetId()" method="post">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button class="btn red" type="submit" name="button">Delete Client</button>
+                            </form>
+                        </div>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
 </div>

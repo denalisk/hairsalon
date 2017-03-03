@@ -2,6 +2,14 @@ div.nav-button {
     display: inline-block;
 }
 
+.button-holder {
+    display: inline-block;
+}
+
+.client-edit {
+    display: none;
+}
+
 div.custom-sidebar {
     position: fixed;
     top: 70px;
@@ -11,4 +19,8 @@ div.custom-sidebar {
 
 div.custom-content {
     margin-left: 285px;
+}
+
+div.invalid-entry {
+    display: none;
 }

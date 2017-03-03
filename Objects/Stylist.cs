@@ -61,7 +61,8 @@ namespace HairSalonApp
         public void Save()
         {
             // Adds a local Stylist Object to the database, won't save if it's a duplicate stylist
-            if (this.IsNewStylist() == -1)
+            int potentialId = this.IsNewStylist();
+            if (potentialId == -1)
             {
                 SqlConnection conn = DB.Connection();
                 conn.Open();
@@ -73,10 +74,11 @@ namespace HairSalonApp
 
                 while(rdr.Read())
                 {
-                    this.SetId(rdr.GetInt32(0));
+                    potentialId = rdr.GetInt32(0);
                 }
                 DB.CloseSqlConnection(rdr, conn);
             }
+            this.SetId(potentialId);
         }
 
         public static Stylist Find(int targetId)

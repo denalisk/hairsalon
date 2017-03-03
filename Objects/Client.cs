@@ -70,7 +70,8 @@ namespace HairSalonApp
         public void Save()
         {
             // Adds a local Client Object to the database, won't save if it's a duplicate client
-            if (this.IsNewClient() == -1)
+            int potentialId = this.IsNewClient();
+            if (potentialId == -1)
             {
                 SqlConnection conn = DB.Connection();
                 conn.Open();
@@ -85,10 +86,11 @@ namespace HairSalonApp
 
                 while(rdr.Read())
                 {
-                    this.SetId(rdr.GetInt32(0));
+                    potentialId = rdr.GetInt32(0);
                 }
                 DB.CloseSqlConnection(rdr, conn);
             }
+            this.SetId(potentialId);
         }
 
         public static Client Find(int targetId)

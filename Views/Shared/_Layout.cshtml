@@ -14,7 +14,7 @@
     <body>
         <nav>
             <div class="nav-wrapper indigo lighten-2">
-                <a href="#" class="brand-logo">Royal Cuts Home</a>
+                <a href="/" class="brand-logo">Royal Cuts Home</a>
                 <ul id="mobile-nav" class="right">
                     <li><a href="/stylists">Stylist View</a></li>
                     <li><a href="/clients">Client View</a></li>
@@ -51,7 +51,7 @@
                                         <form class="" action="/clients" method="post">
                                             <input class="" type="text" name="new-client-name" placeholder="New client name">
                                             <input class="" type="text" name="new-client-haircolor" placeholder="New client haircolor">
-                                            <input type="text" name="new-stylist-name" placeholder="Name of stylist">
+                                            <input type="text" name="stylist-name" placeholder="Name of stylist">
                                             <button class="btn" type="submit" name="button">Create Client</button>
                                         </form>
                                     </div>
@@ -61,6 +61,13 @@
                         <hr />
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="invalid-entry hidden-div">
+            <div class="card yellow lighten-5">
+                <p>
+                  You must enter valid values for all form fields!
+                </p>
             </div>
         </div>
         <div class="custom-content">

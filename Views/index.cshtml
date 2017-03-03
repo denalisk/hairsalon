@@ -1,3 +1,44 @@
 @{
     Layout="Shared/_Layout.cshtml";
 }
+<div class="row">
+    <div class="col s6">
+        @if(Model["stylists"].Count == 0)
+        {
+            <h5>There are no stylists listed</h5>
+
+        }
+        else
+        {
+            <div class="col s4">
+            @foreach(var entry in Model["stylists"])
+            {
+                <div class="stylist-holder">
+                <a href="/stylist_clients/@entry.GetId()" id="@entry.GetName()"><h5>@entry.GetName()</h5></a>
+                </div>
+            }
+            </div>
+        }
+    </div>
+    <div class="col s6">
+        @if(Model["clients"].Count == 0)
+        {
+            <h5>There are no clients listed</h5>
+        }
+        else
+        {
+            <div class="col s6">
+                @foreach(var entry in Model["clients"])
+                {
+                    <div class="client-holder">
+                    <h5>@entry.GetName()</h5>
+                    <h6>Preferred Hair Color: @entry.GetHairColor()</h6>
+                    <h6>Current Stylist: @entry.GetStylistName()</h6>
+                    </div>
+                }
+            </div>
+        }
+
+
+    </div>
+</div>

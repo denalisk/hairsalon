@@ -11,8 +11,9 @@ namespace HairSalonApp
         {
             Get["/"] = _ =>
             {
-                return View["index.cshtml"];
+                return View["index.cshtml", ModelMaker()];
             };
+
             Post["/update/{id}"] = data =>
             {
                 Client currentClient = Client.Find(data.id);
@@ -30,6 +31,7 @@ namespace HairSalonApp
                 newStylist.Save();
                 return View["stylists", Stylist.GetAll()];
             };
+
             Get["/clients"] = _ =>
             {
                 return View["clients", Client.GetAll()];
@@ -73,5 +75,26 @@ namespace HairSalonApp
             };
 
         }
+
+        public static Dictionary<string, object> ModelMaker()
+        {
+            Dictionary<string, object> model = new Dictionary<string, object> {
+                {"stylists", Stylist.GetAll()},
+                {"clients", Client.GetAll()}
+            };
+            return model;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }

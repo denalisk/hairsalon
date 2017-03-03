@@ -97,8 +97,10 @@ namespace HairSalonApp
             // Arrange
             Stylist firstStylist = new Stylist("Lauren");
             firstStylist.Save();
+            Stylist secondStylist = new Stylist("Ralph");
+            secondStylist.Save();
             Client firstClient = new Client("Bob", firstStylist.GetId(), "Brown", System.DateTime.Now);
-            Client duplicateClient = new Client("Bob", firstStylist.GetId(), "Brown", System.DateTime.Now);
+            Client duplicateClient = new Client("Bob", secondStylist.GetId(), "Brown", System.DateTime.Now);
             firstClient.Save();
             firstClient.SetId(0);
             // Act

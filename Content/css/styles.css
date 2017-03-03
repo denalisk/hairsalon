@@ -1,3 +1,14 @@
-/*body {
-    background-color: lightgrey;
-}*/
+div.nav-button {
+    display: inline-block;
+}
+
+div.custom-sidebar {
+    position: fixed;
+    top: 70px;
+    height: 100%;
+    width: 280px;
+}
+
+div.custom-content {
+    margin-left: 285px;
+}
